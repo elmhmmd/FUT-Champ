@@ -642,7 +642,10 @@ const playerBadges = [
   }
 ];
 
- // Variable to track which slot was clicked
+  // Track selected players
+  const selectedPlayers = new Set();
+
+  // Variable to track which slot was clicked
   let currentSlot = null;
 
   // Function to clear and populate badges grid
@@ -650,9 +653,9 @@ const playerBadges = [
     // Clear existing badges
     badgesGrid.innerHTML = '';
 
-    // Filter badges based on exact position match
+    // Filter badges based on exact position match and not already selected
     const filteredBadges = playerBadges.filter(player => 
-      player.type === slotPosition
+      player.type === slotPosition && !selectedPlayers.has(player.name)
     );
 
     // Populate filtered badges
@@ -732,6 +735,9 @@ const playerBadges = [
           
           // Add the cloned badge to the slot
           currentSlot.appendChild(playerBadgeClone);
+          
+          // Mark the player as selected
+          selectedPlayers.add(player.name);
           
           // Close the modal
           modal.style.display = 'none';
