@@ -418,19 +418,19 @@ const players = [
   },
 ];
 
-let activePlayer = [];
+let currentSquad = [];
 
 let filteredPlayer = players;
 
-let existName = null;
+let exists = null;
 
 let playerList = document.querySelector(".players_list");
 
-let sideBar_title = document.getElementById("sideBar_title");
+let modal_title = document.getElementById("modal_title");
 
 let playerForm = document.getElementById("playerForm");
 
-let createPlayerPop = document.getElementById("createPop");
+let createPlayerPopUp = document.getElementById("createPopUp");
 
 const openListPlayers = () => {
   document.getElementById("players_list").toggleAttribute("open", true);
@@ -441,22 +441,22 @@ const closeListPlayers = () => {
 };
 
 const onOpenCreatePlayer = () => {
-  createPlayerPop.toggleAttribute("open", true);
+  createPlayerPopUp.toggleAttribute("open", true);
 };
 
 const onCloseCreatePlayer = () => {
-  createPlayerPop.toggleAttribute("open", false);
+  createPlayerPopUp.toggleAttribute("open", false);
 };
 
 const checkPlaceholders = () => {
   document.querySelectorAll(".placeholder_player").forEach((ele) => {
     ele.onclick = () => {
       const targetPosition = ele;
-      sideBar_title.textContent = "Remplacement";
+      modal_title.textContent = "Remplacement";
       filteredPlayer = players.filter(
         (player) =>
           player.position === targetPosition.id &&
-          !activePlayer.some((active) => active.name === player.name)
+          !currentSquad.some((active) => active.name === player.name)
       );
       openListPlayers();
       renderListPlayers(targetPosition);
@@ -470,7 +470,7 @@ const seeDetails = (playerName) => {
   let player_details = document.getElementById("player_details");
   player_details.toggleAttribute("open");
 
-  sideBar_title.textContent = "Player Details";
+  modal_title.textContent = "Player Details";
 
   const detailsPlayer = players.filter(
     (pl) => pl.name.split(" ")[0] === playerName.split(" ")[0]
@@ -479,103 +479,88 @@ const seeDetails = (playerName) => {
   let badge = "badge_gold.webp";
 
   const cardDetails = `
-  <div class="cursor-pointer bg-zinc-50 rounded-lg shadow-md max-w-lg p-3">
-  <div class="flex items-center justify-between mb-3 ">
-    <h3 class="font-bold text-xl text-neutral-700">
-     Card details
-    </h3>
-    <img src="./Assets/Icons/+.webp" class="w-5" onclick="closeDetails()" >
-  </div>
-  <div class="flex ">
-  <img src=${detailsPlayer[0].photo} alt="" class="me-2 w-20 lg:w-32" />
-  <div class="flex-grow">
-    <div class="flex justify-between pe-5 flex-wrap gap-x-1 gap-y-2">
-        <h3 class="font-bold text-xl  text-neutral-700">${
-          detailsPlayer[0].name
-        }</h3>
-        <div class="flex gap-x-2">
-        ${
-          detailsPlayer[0].flag
-            ? `<img src=${detailsPlayer[0].flag} class="w-7" >`
-            : ""
-        }
-        ${
-          detailsPlayer[0].logo
-            ? `<img src=${detailsPlayer[0].logo} class="w-7" >`
-            : ""
-        }
+    <div class="cursor-pointer bg-slate-800 rounded-lg p-4">
+        <div class="flex justify-between items-center pe-5 mb-2">
+            <img src="./Assets/Icons/+.webp" class="rotate-45 w-6" onclick="closeDetails()" >
+        </div>
+        <div class="flex items-center">
+            <img src=${detailsPlayer[0].photo} alt="" class="me-4 w-24 lg:w-32 rounded-lg" />
+            <div class="flex-grow">
+                <div class="flex justify-between items-center pe-5 mb-2">
+                    <h3 class="font-bold text-xl text-white">${detailsPlayer[0].name}</h3>
+                    <div class="flex gap-x-2">
+                        ${detailsPlayer[0].flag ? `<img src=${detailsPlayer[0].flag} class="w-7 rounded-full" >` : ""}
+                        ${detailsPlayer[0].logo ? `<img src=${detailsPlayer[0].logo} class="w-7 rounded-full" >` : ""}
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <span class="font-bold text-slate-300">${detailsPlayer[0].position}</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 text-[70%] lg:text-[100%]">
+                    ${
+                        detailsPlayer[0].pace
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">PAC: <span class="text-white">${detailsPlayer[0].pace}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].shooting
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">SHO: <span class="text-white">${detailsPlayer[0].shooting}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].passing
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">PAS: <span class="text-white">${detailsPlayer[0].passing}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].dribbling
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">DRB: <span class="text-white">${detailsPlayer[0].dribbling}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].defending
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">DEF: <span class="text-white">${detailsPlayer[0].defending}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].physical
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">PHY: <span class="text-white">${detailsPlayer[0].physical}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].diving
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">DIV: <span class="text-white">${detailsPlayer[0].diving}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].handling
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">HDL: <span class="text-white">${detailsPlayer[0].handling}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].kicking
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">KICK: <span class="text-white">${detailsPlayer[0].kicking}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].reflexes
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">RFL: <span class="text-white">${detailsPlayer[0].reflexes}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].speed
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">SPD: <span class="text-white">${detailsPlayer[0].speed}</span></p>`
+                            : ""
+                    }
+                    ${
+                        detailsPlayer[0].positioning
+                            ? `<p class="bg-amber-900/20 p-1 rounded text-center font-bold text-amber-900">POS: <span class="text-white">${detailsPlayer[0].positioning}</span></p>`
+                            : ""
+                    }
+                </div>
+            </div>
         </div>
     </div>
-    <div class="flex items-center gap-x-2 mt-1">
-      <img src="./assets/position.svg" alt="" class="w-5" />
-      <span class="font-bold text-red-400">${detailsPlayer[0].position}</span>
-    </div>
-    <div class="text-[70%] mt-3 lg:text-[100%] flex items-start gap-x-6 flex-wrap">
-        <h4 class="font-bold">More info :</h4>
-        ${
-          detailsPlayer[0].pace
-            ? `<p class="font-bold text-blue-800">PAC : <span>${detailsPlayer[0].pace} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].shooting
-            ? `<p class="font-bold text-blue-800">SHO : <span>${detailsPlayer[0].shooting} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].passing
-            ? `<p class="font-bold text-blue-800">PAS : <span>${detailsPlayer[0].passing} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].dribbling
-            ? `<p class="font-bold text-blue-800">DRB : <span>${detailsPlayer[0].dribbling} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].defending
-            ? `<p class="font-bold text-blue-800">DEF : <span>${detailsPlayer[0].defending} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].physical
-            ? `<p class="font-bold text-blue-800">PHY : <span>${detailsPlayer[0].physical} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].diving
-            ? `<p class="font-bold text-blue-800">DIV : <span>${detailsPlayer[0].diving} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].handling
-            ? `<p class="font-bold text-blue-800">HDL : <span>${detailsPlayer[0].handling} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].kicking
-            ? `<p class="font-bold text-blue-800">KIK : <span>${detailsPlayer[0].kicking} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].reflexes
-            ? `<p class="font-bold text-blue-800">RFL : <span>${detailsPlayer[0].reflexes} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].speed
-            ? `<p class="font-bold text-blue-800">SPD : <span>${detailsPlayer[0].speed} |</span></p>`
-            : ""
-        }
-        ${
-          detailsPlayer[0].positioning
-            ? `<p class="font-bold text-blue-800">POS : <span>${detailsPlayer[0].positioning} |</span></p>`
-            : ""
-        }
-    </div>
-  </div>
-  </div>
-  </div>
 `;
   player_details.innerHTML = cardDetails;
 
@@ -589,28 +574,29 @@ const closeDetails = () => {
 const deletePlayer = (target) => {
   const playerName = target.getAttribute("data-name");
 
-  activePlayer = activePlayer.filter(
+  currentSquad = currentSquad.filter(
     (pl) => pl.name.split(" ")[0] !== playerName
   );
 
-  // Create a new placeholder card
+
   const newDiv = document.createElement("div");
   newDiv.innerHTML = `
-      <div
-        id="${target.id}"
-        class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
-      >
-        <img
-          src="./Assets/Images/badge_gold.webp"
-          alt="Player badge"
-          class="absolute w-full h-full z-10"
-        />
-        <div
-          class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
-        >
-          <img src="./Assets/Images/+.webp" alt="" class="w-[40%] rotate-45" />
-        </div>
-      </div>
+          <div
+              id="${target.id}"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+            >
+              <img
+                src="./Assets/Images/badge_gold.webp"
+                alt="Player badge"
+                class="absolute w-full h-full z-10"
+              />
+
+              <div
+                class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
+              >
+                <img src="./Assets/Icons/+.webp" alt="" />
+              </div>
+            </div>
     `;
 
   const placeholderCard = newDiv.firstElementChild;
@@ -619,15 +605,15 @@ const deletePlayer = (target) => {
 };
 
 const editPlayer = (player) => {
-  existName = player.name.split(" ")[0];
-  const targetPosition = document.querySelector(`[data-name='${existName}']`);
-  sideBar_title.textContent = "Switch Player";
+  exists = player.name.split(" ")[0];
+  const targetPosition = document.querySelector(`[data-name='${exists}']`);
+  modal_title.textContent = "Switch Player";
 
-  activePlayer = activePlayer.filter((pl) => pl.name !== player.name);
+  currentSquad = currentSquad.filter((pl) => pl.name !== player.name);
   openListPlayers();
   filteredPlayer = players.filter(
     (pl) =>
-      pl.position === targetPosition.id && pl.name.split(" ")[0] !== existName
+      pl.position === targetPosition.id && pl.name.split(" ")[0] !== exists
   );
 
   if (targetPosition) {
@@ -635,7 +621,7 @@ const editPlayer = (player) => {
   } else {
     console.error("Target position not found for editing.");
   }
-  existName = null;
+  exists = null;
 };
 
 const createPlayerCard = (player) => {
@@ -644,7 +630,7 @@ const createPlayerCard = (player) => {
   card.dataset.name = player.name.split(" ")[0];
   card.id = player.position;
   card.className =
-    "w-16 sm:w-24 md:w-30 group lg:w-32 xl:w-36 aspect-[1/1.4] relative z-20 cursor-pointer hover:scale-110 transition-transform activePlayers";
+    "w-16 sm:w-24 md:w-30 group lg:w-32 xl:w-36 aspect-[1/1.4] relative z-20 cursor-pointer hover:scale-110 transition-transform currentSquads";
 
   card.innerHTML = `
         <div class="absolute hidden z-30 group-hover:flex w-[110%] lg:w-[100%] items-center justify-between p-2 shadow-lg left-0 -top-[20%] lg:-top-[3%] bg-white rounded-lg">
@@ -652,11 +638,11 @@ const createPlayerCard = (player) => {
         <img src="./Assets/Images/badge_gold.webp" alt="Player badge" class="absolute w-full h-full z-10"/>
         <div class="relative z-20 w-full h-full">
             <img src="${player.photo}" alt="Player Photo" class="absolute w-[60%] top-[20%] right-[20%]"/>
-            <div class="absolute top-[27%] left-[16%] text-center text-white">
+            <div class="absolute top-[27%] left-[16%] text-center text-black">
                 <p class="text-[40%] lg:text-[90%] font-bold">${player.rating}</p>
-                <p class="text-[27%] lg:text-[78%] font-semibold">${player.position}</p>
+                <p class="text-[27%] lg:text-[78%] font-bold">${player.position}</p>
             </div>
-            <div class="absolute top-[65%] w-full text-center text-white">
+            <div class="absolute top-[65%] w-full text-center text-black">
                 <p class="text-[50%] max-w-[70%] mx-auto w-full truncate lg:text-[80%] font-semibold">${player.name}</p>
                 <div class="flex items-center justify-center gap-x-2"> 
                     <img src="${player.logo}" class="w-[10%] h-[10%]">
@@ -696,16 +682,16 @@ const appendPlayer = (player, targetElement) => {
     return;
   }
 
-  if (existName && typeof existName === "string") {
-    activePlayer = players.filter((pl) => pl.name.split(" ")[0] !== existName);
+  if (exists && typeof exists === "string") {
+    currentSquad = players.filter((pl) => pl.name.split(" ")[0] !== exists);
   }
 
   const newCard = createPlayerCard(player);
-  activePlayer.push(player);
+  currentSquad.push(player);
 
   targetElement.replaceWith(newCard);
 
-  existName = null;
+  exists = null;
   closeListPlayers();
 };
 
@@ -796,7 +782,7 @@ const renderListPlayers = (targetPosition) => {
             </div>
             <div class="w-full flex justify-end px-3 mt-3">
                 ${
-                    existName
+                    exists
                         ? `<img src="./Assets/Icons/modify-icon.webp" class="w-7" >`
                         : ""
                 }
@@ -889,12 +875,12 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
   const urlRegex =
     /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([\/\w .-]*)*\/?$/;
 
-  // Name validation
+
   if (
-    nameInput.value.trim().length < 2 ||
+    nameInput.value.trim().length < 4 ||
     /[^a-zA-Z\s]/.test(nameInput.value.trim())
   ) {
-    nameError.textContent = "Invalid name. Please enter at least 2 letters.";
+    nameError.textContent = "Valeur tres court pour etre un nom.";
     nameError.classList.remove("hidden");
     isValid = false;
   } else {
@@ -902,10 +888,9 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
     nameError.classList.add("hidden");
   }
 
-  // Photo  validation
 
   if (photoInput.value.length < 2 && !urlRegex.test(photoInput.value.trim())) {
-    photoError.textContent = "Please provide a valid URL.";
+    photoError.textContent = "Veuillez fournir une URL valide.";
     photoError.classList.remove("hidden");
     isValid = false;
   } else {
@@ -913,10 +898,10 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
     photoError.classList.add("hidden");
   }
 
-  // logo validation
+  
 
   if (logoInput.value.length < 2 && !urlRegex.test(logoInput.value.trim())) {
-    logoError.textContent = "Please provide a valid URL.";
+    logoError.textContent = "Veuillez fournir une URL valide.";
     logoError.classList.remove("hidden");
     isValid = false;
   } else {
@@ -924,10 +909,9 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
     logoError.classList.add("hidden");
   }
 
-  // flag validation
 
   if (flagInput.value.length < 2 && !urlRegex.test(flagInput.value.trim())) {
-    flagError.textContent = "Please provide a valid URL.";
+    flagError.textContent = "Veuillez fournier une URL valide.";
     flagError.classList.remove("hidden");
     isValid = false;
   } else {
@@ -935,14 +919,14 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
     flagError.classList.add("hidden");
   }
 
-  // rating validation
+  
   if (
     !ratingInput.value.trim() ||
     isNaN(ratingInput.value) ||
     ratingInput.value < 1 ||
     ratingInput.value > 100
   ) {
-    ratingError.textContent = "Rating must be a number between 1 and 100.";
+    ratingError.textContent = "le Rating doit etre entre 1 et 100.";
     ratingError.classList.remove("hidden");
     isValid = false;
   } else {
@@ -961,7 +945,7 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
       return;
     } else if (ele.value > 100) {
       ele.nextElementSibling.classList.remove("hidden");
-      ele.nextElementSibling.textContent = "number must be between 1 and 100";
+      ele.nextElementSibling.textContent = "Veuillez fournir une valeur entre 1 et 100";
       isValid = false;
     } else {
       ele.nextElementSibling.classList.add("hidden");
@@ -989,11 +973,3 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
 
   onCloseCreatePlayer();
 });
-
-const showAllPlayers = () => {
-  sideBar_title.textContent = "All Players available";
-  existName = null;
-  filteredPlayer = players;
-  renderListPlayers();
-  openListPlayers();
-};
