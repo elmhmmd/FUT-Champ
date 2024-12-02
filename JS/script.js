@@ -940,7 +940,7 @@ document.getElementById("playerForm").addEventListener("submit", function (e) {
   statisctics.forEach((ele) => {
     if (ele.value < 1) {
       ele.nextElementSibling.classList.remove("hidden");
-      ele.nextElementSibling.textContent = "Field is required!";
+      ele.nextElementSibling.textContent = "Champ Obligatoire!";
       isValid = false;
       return;
     } else if (ele.value > 100) {
