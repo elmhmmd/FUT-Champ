@@ -481,7 +481,7 @@ const seeDetails = (playerName) => {
   const cardDetails = `
     <div class="cursor-pointer bg-slate-800 rounded-lg p-4">
         <div class="flex justify-between items-center pe-5 mb-2">
-            <img src="./assets/icons/+.webp" class="rotate-45 w-6" onclick="closeDetails()" >
+            <img src="./Assets/Icons/+.webp" class="rotate-45 w-6" onclick="closeDetails()" >
         </div>
         <div class="flex items-center">
             <img src=${detailsPlayer[0].photo} alt="" class="me-4 w-24 lg:w-32 rounded-lg" />
@@ -586,7 +586,7 @@ const deletePlayer = (target) => {
               class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
-                src="./assets/images/badge_gold.webp"
+                src="./Assets/images/badge_gold.webp"
                 alt="Player badge"
                 class="absolute w-full h-full z-10"
               />
@@ -594,7 +594,7 @@ const deletePlayer = (target) => {
               <div
                 class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-                <img src="./assets/icons/+.webp" alt="" />
+                <img src="./Assets/Icons/+.webp" alt="" />
               </div>
             </div>
     `;
@@ -635,7 +635,7 @@ const createPlayerCard = (player) => {
   card.innerHTML = `
         <div class="absolute hidden z-30 group-hover:flex w-[110%] lg:w-[100%] items-center justify-between p-2 shadow-lg left-0 -top-[20%] lg:-top-[3%] bg-white rounded-lg">
         </div>
-        <img src="./assets/images/badge_gold.webp" alt="Player badge" class="absolute w-full h-full z-10"/>
+        <img src="./Assets/images/badge_gold.webp" alt="Player badge" class="absolute w-full h-full z-10"/>
         <div class="relative z-20 w-full h-full">
             <img src="${player.photo}" alt="Player Photo" class="absolute w-[60%] top-[20%] right-[20%]"/>
             <div class="absolute top-[27%] left-[16%] text-center text-black">
@@ -654,17 +654,17 @@ const createPlayerCard = (player) => {
 
   const actionMenu = card.querySelector(".absolute.hidden");
   const seeDet = document.createElement("img");
-  seeDet.src = "./assets/icons/view.svg";
+  seeDet.src = "./Assets/Icons/view.svg";
   seeDet.className = "w-4";
   seeDet.onclick = () => seeDetails(player.name);
 
   const editpl = document.createElement("img");
-  editpl.src = "./assets/icons/modify-icon.webp";
+  editpl.src = "./Assets/Icons/modify-icon.webp";
   editpl.className = "w-4";
   editpl.onclick = () => editPlayer(player, card);
 
   const deletPl = document.createElement("img");
-  deletPl.src = "./assets/icons/Trash Can Icon.png";
+  deletPl.src = "./Assets/Icons/Trash Can Icon.png";
   deletPl.className = "w-4";
   deletPl.onclick = () => deletePlayer(card);
 
@@ -783,7 +783,7 @@ const renderListPlayers = (targetPosition) => {
             <div class="w-full flex justify-end px-3 mt-3">
                 ${
                     exists
-                        ? `<img src="./assets/icons/modify-icon.webp" class="w-7" >`
+                        ? `<img src="./Assets/Icons/modify-icon.webp" class="w-7" >`
                         : ""
                 }
             </div>
