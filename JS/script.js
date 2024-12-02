@@ -420,7 +420,7 @@ const players = [
 
 let currentSquad = [];
 
-let filteredPlayer = players;
+let filteredPlayers = players;
 
 let exists = null;
 
@@ -453,7 +453,7 @@ const checkPlaceholders = () => {
     ele.onclick = () => {
       const targetPosition = ele;
       modal_title.textContent = "Remplacement";
-      filteredPlayer = players.filter(
+      filteredPlayers = players.filter(
         (player) =>
           player.position === targetPosition.id &&
           !currentSquad.some((active) => active.name === player.name)
@@ -611,7 +611,7 @@ const editPlayer = (player) => {
 
   currentSquad = currentSquad.filter((pl) => pl.name !== player.name);
   openListPlayers();
-  filteredPlayer = players.filter(
+  filteredPlayers = players.filter(
     (pl) =>
       pl.position === targetPosition.id && pl.name.split(" ")[0] !== exists
   );
@@ -698,7 +698,7 @@ const appendPlayer = (player, targetElement) => {
 const renderListPlayers = (targetPosition) => {
   playerList.innerHTML = "";
 
-  filteredPlayer.forEach((player) => {
+  filteredPlayers.forEach((player) => {
     const playerCard = document.createElement("div");
     playerCard.className = `flex py-3 ${
       targetPosition && "cursor-pointer"
