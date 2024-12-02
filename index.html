@@ -4,53 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FUT-Champs</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 100;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.4);
-      }
-      .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto;
-        padding: 20px;
-        border-radius: 10px;
-        width: 80%;
-        max-width: 600px;
-        max-height: 70vh;
-        overflow-y: auto;
-      }
-      .close-modal {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .close-modal:hover {
-        color: black;
-      }
-      .badge-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 20px;
-        justify-content: center;
-        align-items: center;
-      }
-
-    </style>
-    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body>
+  <body class="bg-black">
+    <button onclick="onOpenCreatePlayer()" class="text-black bg-zinc-100 hover:bg-zinc-200 mt-3 flex items-center gap-x-2 ms-auto px-3 py-2 rounded-md me-4">
+        Ajouter un joueur +
+    </button>
     <main class="flex px-4 lg:px-10">
-      <!-- Stadium Container -->
       <div class="relative w-fit h-fit my-36 mx-auto b">
         <img src="./Assets/Images/stadium_background.webp" alt="" class="rounded-sm" />
 
@@ -61,52 +21,50 @@
           >
             <div
               id="LW"
-              class="player-slot player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
                 class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-               
-  <img src="./Assets/Icons/+.webp" alt="Close" class="w-6 h-6">
-
+                <img src="./Assets/Icons/+.webp" alt="" />
               </div>
             </div>
             <div
               id="ST"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] z-20 relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] z-20 relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
-                class="player-slot relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
+                class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-                <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+                <img src="./Assets/Icons/+.webp" alt="" />
               </div>
             </div>
             <div
               id="RW"
-              class="player-slot player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
               class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
             >
-              <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+              <img src="./Assets/Icons/+.webp" alt="" />
             </div>
             </div>
           </div> 
@@ -116,50 +74,50 @@
           >
             <div
               id="CM"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
               class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
             >
-              <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+              <img src="./Assets/Icons/+.webp" alt="" />
             </div>
             </div>
             <div
               id="CM"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] z-20 relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] z-20 relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
                 class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-                <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+                <img src="./Assets/Icons/+.webp" alt="" />
               </div>
             </div>
             <div
               id="CM"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
                 class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-                <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+                <img src="./Assets/Icons/+.webp" alt="" />
               </div>
             </div>
           </div>
@@ -169,66 +127,66 @@
           >
             <div
               id="LB"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
               class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
             >
-              <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+              <img src="./Assets/Icons/+.webp" alt="" />
             </div>
             </div>
             <div
               id="CB"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
                 class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-                <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+                <img src="./Assets/Icons/+.webp" alt=""/>
               </div>
             </div>
             <div
               id="CB"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
               class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
             >
-              <img src="./Assets/Icons/+.webp" alt="" class="w-6 h-6" />
+              <img src="./Assets/Icons/+.webp" alt="" />
             </div>
             </div>
             <div
               id="RB"
-              class="player-slot w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
                 class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-                <img src="./Assets/Icons/+.webp" alt="" class="w-6 h-6" />
+                <img src="./Assets/Icons/+.webp" alt="" />
               </div>
             </div>
           </div>
@@ -238,33 +196,132 @@
           >
           <div
               id="GK"
-              class="player-slot w-24 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
+              class="placeholder_player w-16 sm:w-24 md:w-30 lg:w-32 aspect-[1/1.4] relative hover:scale-105 cursor-pointer transition-transform"
             >
               <img
                 src="./Assets/Images/badge_gold.webp"
                 alt="Player badge"
-                class="badge-trigger absolute w-full h-full z-10"
+                class="absolute w-full h-full z-10"
               />
 
               <div
                 class="relative z-20 w-[35%] aspect-square rounded-full bg-white flex items-center justify-center top-[40%] left-[35%]"
               >
-                <img src="./Assets/Icons/+.webp" alt="add" class="w-6 h-6" />
+                <img src="./Assets/Icons/+.webp" alt="" />
               </div>
             </div> 
+            
         </div>
-        </div>
-      </div>
-      <!-- Badges Modal -->
-      <div id="badgesModal" class="modal">
-        <div class="modal-content">
-          <span class="close-modal">&times;</span>
-          <h2 class="text-2xl font-bold mb-4">Choose a player</h2>
-          <div id="badgesGrid" class="badge-grid">
-          </div>
         </div>
       </div>
     </main>
+    <div
+      id="players_list"
+      class="fixed bg-slate-800 w-full h-full max-h-screen flex flex-col md:[75%] xl:w-[50%] shadow-lg z-50 open:top-0 -top-full transition-all duration-300 p-5 left-1/2 -translate-x-1/2"
+    >
+      <div class="flex justify-between">
+        <h1 id="sideBar_title" class="text-xl font-bold text-white">Remplacement</h1>
+        <img
+          src="./Assets/Icons/+.webp"
+          alt=""
+          class="w-7 ms-auto rotate-45 cursor-pointer"
+          onclick="closeListPlayers()"
+        />
+      </div>
+      <div
+        class="players_list flex flex-col gap-y-3 mt-10 flex-grow h-full overflow-y-scroll"
+      ></div>
+    </div>
+    <div id="createPop" class="fixed inset-0 min-h-screen h-full w-full overflow-y-auto backdrop-blur-md z-50 hidden open:flex items-center justify-center p-4">
+        <div class="bg-zinc-50 max-w-2xl max-h-full overflow-y-scroll shadow-lg rounded-lg px-4 py-6 lg:p-5 w-full">
+          <div class="flex items-center justify-between mb-4 p-2">
+            <h1 class="text-xl font-bold text-neutral-700">Create New Player</h1>
+            <img src="./Assets/Icons/+.webp" onclick="onCloseCreatePlayer()" class=" rotate-45 w-8 cursor-pointer">
+          </div>
+          <form id="playerForm">
+            <div class="mb-4">
+              <label class="block font-medium mb-2">Name</label>
+              <input
+                type="text"
+                name="name"
+                class="w-full border rounded px-3 py-2 focus:outline-none"
+                placeholder="Player Name"
+        
+              />
+              <small class="text-red-500 hidden"></small>
+            </div>
+            <div class="mb-4">
+              <label class="block font-medium mb-2">Photo URL</label>
+              <input
+                type="url"
+                name="photo"
+                class="w-full border rounded px-3 py-2 focus:outline-none"
+                placeholder="Photo URL"
+              />
+              <small class="text-red-500 hidden"></small>
+            </div>
+            <div class="mb-4">
+              <label class="block font-medium mb-2">Flag</label>
+              <input
+                type="url"
+                name="flag"
+                class="w-full border rounded px-3 py-2 focus:outline-none"
+                placeholder="Flag URL"
+              />
+              <small class="text-red-500 hidden"></small>
+            </div>
+            <div class="mb-4">
+              <label class="block font-medium mb-2">Logo</label>
+              <input
+                type="url"
+                name="logo"
+                class="w-full border rounded px-3 py-2 focus:outline-none"
+                placeholder="Logo URL"
+              />
+              <small class="text-red-500 hidden"></small>
+            </div>
+            <div class="mb-4">
+                <label class="block font-medium mb-2">Rating</label>
+                <input
+                  type="number"
+                  name="rating"
+                  class="w-full border rounded px-3 py-2"
+                  placeholder="rating"
+                />
+              <small class="text-red-500 hidden"></small>
+            </div>
+            <div class="mb-4">
+              <label class="block font-medium mb-2">Position</label>
+              <select
+                name="position"
+                id="positionSelect"
+                class="w-full border rounded px-3 py-2"
+              >
+                <option value="" disabled selected>Select Position</option>
+                <option value="GK">Goalkeeper (GK)</option>
+                <option value="CM">Central Midfielder (CM)</option>
+                <option value="ST">Striker (ST)</option>
+                <option value="CB">Center back (CB)</option>
+                <option value="LB">Left back (LB)</option>
+                <option value="RB">Right back (RB)</option>
+                <option value="LW">Left wing (LW)</option>
+                <option value="RW">Right wing (RW)</option>
+              </select>
+              <small class="text-red-500 hidden"></small>
+            </div>
+            <div id="dynamicFields" class="grid lg:grid-cols-2 mt-3 gap-5"></div>
+            <button
+              type="submit"
+              class="w-full bg-zinc-950 text-white py-2 rounded mt-4"
+            >
+              Create Player
+            </button>
+          </form>
+          
+        </div>
+      </div>
+      <div id="player_details" class="fixed hidden open:flex h-screen  items-center justify-center w-full inset-0 z-50 backdrop-blur-md">
+      </div>
     <script src="./JS/script.js"></script>
   </body>
 </html>
